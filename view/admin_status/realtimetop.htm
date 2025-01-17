@@ -1,0 +1,12 @@
+<html>
+<head>
+    <meta http-equiv="refresh" content="1">
+    <title>Real-Time Top</title>
+</head>
+<body>
+    <h1>Real-Time Top</h1>
+    <pre>
+        <% luci.http.write(luci.util.exec("top -b -n 1")) %>
+    </pre>
+</body>
+</html>
