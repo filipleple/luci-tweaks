@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Web Terminal</title>
+    <script>
+        function executeCommand() {
+            var cmd = document.getElementById("command").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "<%=luci.dispatcher.build_url('admin', 'status', 'terminal_exec')%>", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("output").innerText = xhr.responseText;
+                }
+            };
+            xhr.send("cmd=" + encodeURIComponent(cmd));
+        }
+    </script>
+</head>
+<body>
+    <h1>Web Terminal</h1>
+    <input type="text" id="command" placeholder="Enter command here" style="width: 70%;">
+    <button onclick="executeCommand()">Run</button>
+    <pre id="output" style="margin-top: 10px; background: #f4f4f4; padding: 10px; border: 1px solid #ddd;"></pre>
+</body>
+</html>
